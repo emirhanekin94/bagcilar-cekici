@@ -1,0 +1,23 @@
+{
+  "name": "bagcilar-oto-cekici",
+  "version": "1.0.0",
+  "description": "Çalışma branch'i: develop (main'e push yapılmaz).",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/emirhanekin94/bagcilar-cekici.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/emirhanekin94/bagcilar-cekici/issues"
+  },
+  "homepage": "https://github.com/emirhanekin94/bagcilar-cekici#readme",
+  "devDependencies": {
+    "sharp": "^0.35.5"
+  }
+}

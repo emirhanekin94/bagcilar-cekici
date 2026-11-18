@@ -1,0 +1,16 @@
+{
+  "name": "Bağcılar Oto Çekici",
+  "short_name": "Bağcılar Çekici",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#0B1F3A",
+  "lang": "tr",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ]
+}
