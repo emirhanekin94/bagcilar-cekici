@@ -215,7 +215,8 @@
       } else {
         extraGrid.setAttribute('hidden', '');
         toggleBtn.setAttribute('aria-expanded', 'false');
-        if (toggleLabel) toggleLabel.textContent = 'Tüm Bölgeleri Göster (15 Bölge)';
+        const total = toggleLabel ? (toggleLabel.dataset.total || '17') : '17';
+        if (toggleLabel) toggleLabel.textContent = `Tüm Bölgeleri Göster (${total} Bölge)`;
         const sec = document.getElementById('bolgeler');
         if (sec) sec.scrollIntoView({ behavior: 'smooth', block: 'start' });
       }

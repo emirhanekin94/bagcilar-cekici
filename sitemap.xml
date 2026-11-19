@@ -85,6 +85,12 @@
     <priority>0.95</priority>
   </url>
   <url>
+    <loc>https://www.bagcilarotocekici.com/bolgeler/yuzyil-oto-cekici.html</loc>
+    <lastmod>2026-11-19</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  <url>
     <loc>https://www.bagcilarotocekici.com/bolgeler/tekstilkent-oto-cekici.html</loc>
     <lastmod>2026-11-19</lastmod>
     <changefreq>weekly</changefreq>
@@ -98,6 +104,12 @@
   </url>
   <url>
     <loc>https://www.bagcilarotocekici.com/bolgeler/esenler-oto-cekici.html</loc>
+    <lastmod>2026-11-19</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  <url>
+    <loc>https://www.bagcilarotocekici.com/bolgeler/gungoren-oto-cekici.html</loc>
     <lastmod>2026-11-19</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>

@@ -226,7 +226,7 @@ function buildHome() {
 <section class="section" id="bolgeler"><div class="container">
   <div class="sec-head">
     <h2>Hizmet Bölgelerimiz</h2>
-    <p>Bağcılar merkezli nöbetçi filomuzla 15 stratejik noktaya 10–15 dakikada ulaşıyoruz.</p>
+    <p>Bağcılar merkezli nöbetçi filomuzla ${REGIONS.length} stratejik noktaya 10–15 dakikada ulaşıyoruz.</p>
   </div>
   <div class="region-grid" id="home-region-grid">
     ${REGIONS.slice(0, 6).map(r => P.regionCard(r, regionContent[r.slug])).join('')}
@@ -236,7 +236,7 @@ function buildHome() {
   </div>
   <div class="center home-region-actions" style="margin-top: 1.5rem; display: flex; justify-content: center; gap: 12px; flex-wrap: wrap;">
     <button type="button" class="btn btn-primary" id="btn-toggle-all-regions" aria-expanded="false">
-      ${icon('pin')} <span id="toggle-regions-label">Tüm Bölgeleri Göster (15 Bölge)</span>
+      ${icon('pin')} <span id="toggle-regions-label" data-total="${REGIONS.length}">Tüm Bölgeleri Göster (${REGIONS.length} Bölge)</span>
     </button>
     <a class="btn btn-outline" href="/bolgeler/">Bölgeler Detay Sayfası ${icon('arrow')}</a>
   </div>
