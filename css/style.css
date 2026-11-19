@@ -666,15 +666,21 @@ textarea {
 }
 
 .hero-grid-r {
-  display: grid;
-  grid-template-columns: 1fr;
+  position: static;
+  width: 100%;
+  max-width: var(--container);
+  margin-inline: auto;
+  padding: 2rem var(--gutter) 2.5rem;
 }
 
 .hero-region .hero-photo,
 .hero-section .hero-photo {
-  position: relative;
-  aspect-ratio: 16 / 9;
-  max-height: 230px;
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  pointer-events: none;
   overflow: hidden;
   background: var(--navy-deep);
 }
@@ -686,7 +692,7 @@ textarea {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: center;
+  object-position: center center;
 }
 
 .hero-region .hero-photo::after,
@@ -694,13 +700,14 @@ textarea {
   content: '';
   position: absolute;
   inset: 0;
-  background: linear-gradient(180deg, rgba(11, 31, 58, 0.08) 40%, #0B1F3A 100%);
+  background: linear-gradient(180deg, rgba(11, 31, 58, 0.82) 0%, rgba(11, 31, 58, 0.70) 40%, rgba(11, 31, 58, 0.92) 100%);
   pointer-events: none;
 }
 
 .hero-region .hero-copy,
 .hero-section .hero-copy {
-  padding: 1rem var(--gutter) 1.5rem;
+  padding: 0;
+  max-width: 720px;
   position: relative;
   z-index: 2;
 }
@@ -746,6 +753,13 @@ textarea {
 .hero-region .stats span,
 .hero-section .stats span {
   color: #CBD5E1;
+}
+
+/* Hide duplicate upper hero CTA buttons on mobile screens (< 768px) */
+@media (max-width: 768px) {
+  .hero-region .hero-copy .cta-row {
+    display: none !important;
+  }
 }
 
 /* Subpage Hero (including 404.html) */
@@ -2303,31 +2317,30 @@ textarea {
     width: 100%;
     max-width: var(--container);
     margin-inline: auto;
-    padding: 2.75rem 24px;
+    padding: 3.5rem 24px;
     position: static;
   }
 
   .hero-region .hero-photo,
   .hero-section .hero-photo {
     position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    width: 54%;
+    inset: 0;
+    width: 100%;
+    height: 100%;
     max-height: none;
     aspect-ratio: auto;
-    z-index: 1;
+    z-index: 0;
   }
 
   .hero-region .hero-photo::after,
   .hero-section .hero-photo::after {
-    background: linear-gradient(90deg, #0B1F3A 0%, rgba(11, 31, 58, 0.88) 32%, rgba(11, 31, 58, 0.25) 70%, rgba(11, 31, 58, 0.08) 100%);
+    background: linear-gradient(90deg, rgba(11, 31, 58, 0.94) 0%, rgba(11, 31, 58, 0.85) 50%, rgba(11, 31, 58, 0.55) 100%);
   }
 
   .hero-region .hero-copy,
   .hero-section .hero-copy {
     padding: 0;
-    max-width: 680px;
+    max-width: 700px;
   }
 
   .quote-details .quote-form {

@@ -300,6 +300,33 @@ ${ctaBand(`${r.name} çevresinde yolda mı kaldınız?`, 'Arayın ya da WhatsApp
   // Dizin
   const filterBtns = CATEGORIES.map((c, i) => `<button type="button" class="chip${i === 0 ? ' on' : ''}" data-filter="${c.id}">${esc(c.label)}</button>`).join('');
   const crumbs = [['Ana Sayfa', '/'], ['Hizmet Bölgeleri', '/bolgeler/']];
+
+  const regionSteps = [
+    ['Konum & Bölge Tespiti', 'Aradığınızda bulunduğunuz cadde, mahalle veya kavşağı bildirirsiniz; nöbetçi çekici ekibimiz lokasyonunuzu anında teyit eder.'],
+    ['10-15 Dk Hızlı İntikal', 'Bağcılar arterlerinde bekleyen en yakın kayar kasa çekicimiz trafik durumuna göre 10-15 dakikada yanınıza ulaşır.'],
+    ['Kaskolu & Hasarsız Yükleme', 'Aracınız hidrolik platforma sıfır sürtmeyle yüklenir ve 4 noktadan profesyonel kayışlarla kasaya sabitlenir.'],
+    ['Servise Güvenli Teslimat', 'Aracınız dilediğiniz servise ya da adrese hasarsız ulaştırılır; mobil POS ile ödeme alınıp fatura teslim edilir.']
+  ].map((s, i) => `<li><span class="num">${i + 1}</span><h3>${s[0]}</h3><p>${s[1]}</p></li>`).join('');
+
+  const regionWhy = [
+    ['clock', 'Yerel Nöbetçi Filo', 'Bağcılar mahalleleri, İkitelli ve Mahmutbey çevresinde 7/24 hazır bekleyen çekiciler.'],
+    ['shield', '%100 Taşıma Kaskosu', 'Aracınız çekici kasasına girdiği andan teslimata kadar tam kapsamlı kasko teminatındadır.'],
+    ['tag', 'Telefonda Sabit Fiyat', 'Araç tipini ve mesafeyi öğrendikten sonra net fiyat veririz; sonradan ek ücret talep edilmez.'],
+    ['truck', 'Sıfır Eğimli Kayar Kasa', 'Alçak spor araçlar, lüks sedanlar ve elektrikli modeller için tampon korumalı yükleme.'],
+    ['route', 'Otoyol & Arter Hakimiyeti', 'TEM, Basın Ekspres ve E-5 bağlantılarını iyi bilen yerel operatörlerle hızlı intikal.'],
+    ['receipt', 'Mobil POS & Resmi Fatura', 'Yerinde kredi kartı ile tahsilat ve kurumsal şirketler için KDV\'li fatura.']
+  ].map(w => `<li><span class="why-ic">${icon(w[0])}</span><div><h3>${w[1]}</h3><p>${w[2]}</p></div></li>`).join('');
+
+  const regionGallery = GALLERY.slice(0, 8).map(g => `<button type="button" class="g-item" data-lightbox="/images/${g[0]}.webp" data-alt="${esc(g[1])}"><img src="/images/${g[0]}.webp" width="720" height="960" alt="${esc(g[1])}" loading="lazy" decoding="async"></button>`).join('');
+
+  const regionFaqs = [
+    { q: 'Bağcılar dışındaki komşu ilçelere de çekici gönderiyor musunuz?', a: 'Evet. Bağcılar merkezli ekibimiz Esenler, Başakşehir, Bahçelievler, Küçükçekmece, Merter, İkitelli ve İSTOÇ başta olmak üzere tüm Avrupa Yakası\'na 7/24 çekici yönlendirmektedir.' },
+    { q: 'Çekiciniz aracıma ortalama kaç dakikada ulaşır?', a: 'Bağcılar ve çevresinde ortalama varış süremiz 10 ila 15 dakikadır. Çağrı anında trafik yoğunluğu analiz edilerek net varış süresi telefonda tarafınıza bildirilir.' },
+    { q: 'Otoyol veya bağlantı yollarında kaldığımda nasıl konum gönderebilirim?', a: 'Web sitemizdeki WhatsApp Konum Gönder butonuna basarak doğrudan bize canlı konum atabilirsiniz. Operatörümüz en yakın çıkış veya kavşak üzerinden çekiciyi sevk eder.' },
+    { q: 'Gece saatlerinde veya resmi tatillerde fiyat farkı uygulanır mı?', a: 'Hayır. 7 gün 24 saat kesintisiz nöbetçi sistemimizle sabit ve şeffaf fiyat politikamız geçerlidir; telefonda teyit edilen ücret dışında ek masraf çıkmaz.' },
+    { q: 'Kapalı otoparkta kalan araç için kurtarıcı çağırabilir miyim?', a: 'Evet. Rezidans ve AVM otoparklarına giriş yapabilen alçak kabinli kurtarıcı araçlarımızla kapalı garajlardaki araçları da güvenle çıkarıyoruz.' }
+  ];
+
   const main = `
 <section class="page-hero"><div class="container">
   ${P.breadcrumbHtml(crumbs)}
@@ -311,10 +338,30 @@ ${ctaBand(`${r.name} çevresinde yolda mı kaldınız?`, 'Arayın ya da WhatsApp
   <div class="chips" role="group" aria-label="Bölge filtresi">${filterBtns}</div>
   <div class="region-grid">${REGIONS.map(r => P.regionCard(r, regionContent[r.slug])).join('')}</div>
 </div></section>
+<section class="section alt" id="nasil-calisiyoruz"><div class="container">
+  <div class="sec-head"><h2>Nasıl Çalışıyoruz? 4 Adımlı Bölgesel İntikal</h2><p>Bölgenize en yakın çekiciyi hızla yönlendirip aracınızı güvenle teslim ediyoruz.</p></div>
+  <ol class="steps-flow">${regionSteps}</ol>
+</div></section>
+<section class="section" id="neden-biz"><div class="container why-grid">
+  <div class="why-photo">
+    ${picture({ desktop: 'otomobil-cekici-2.webp', alt: 'Bağcılar ve çevre bölgelerde nöbetçi oto çekici filosu', w: 720, h: 960 })}
+    <div class="why-stat"><strong>10-15 Dk</strong><span>Ortalama Bölgesel Varış</span></div>
+  </div>
+  <div>
+    <div class="sec-head left"><h2>Neden ${esc(BUSINESS.name)}?</h2><p>Bölge genelinde geniş araç ağımız ve kurumsal standartlarımızla yanınızdayız.</p></div>
+    <ul class="why-list">${regionWhy}</ul>
+  </div>
+</div></section>
+<section class="section alt" id="galeri"><div class="container">
+  <div class="sec-head"><h2>Gerçek Saha Operasyonları</h2><p>Hizmet bölgelerimizden gerçek araç taşıma ve kurtarma anları.</p></div>
+  <div class="gallery-grid">${regionGallery}</div>
+  <p class="center" style="margin-top:1.5rem;"><a class="btn btn-outline" href="/galeri.html">Tüm Galeriyi İncele ${icon('arrow')}</a></p>
+</div></section>
+<section class="section" id="sss"><div class="container narrow">${P.faqBlock(regionFaqs, 'Bölge Hizmetleri Hakkında Sıkça Sorulan Sorular')}</div></section>
 ${ctaBand('Bölgeniz listede yok mu?', 'Yakın noktalara da gidiyoruz; konumunuzu söyleyin, uygun ekibi yönlendirelim.')}
 `;
   write('bolgeler/index.html', P.page({
-    headHtml: P.head({ title: 'Bağcılar ve Çevresi Çekici Hizmet Bölgeleri | 7/24', description: 'Bağcılar, Esenler, Başakşehir, İkitelli, Bahçelievler, Merter ve İSTOÇ dahil 15 bölgede 7/24 oto çekici. Bölgenizi seçin, ekibimizi hemen yönlendirelim.', path: '/bolgeler/', schema: [P.breadcrumbSchema(crumbs)] }),
+    headHtml: P.head({ title: 'Bağcılar ve Çevresi Çekici Hizmet Bölgeleri | 7/24', description: 'Bağcılar, Esenler, Başakşehir, İkitelli, Bahçelievler, Merter ve İSTOÇ dahil 15 bölgede 7/24 oto çekici. Bölgenizi seçin, ekibimizi hemen yönlendirelim.', path: '/bolgeler/', schema: [P.breadcrumbSchema(crumbs), P.faqSchema(regionFaqs)] }),
     ctx: { active: 'regions' }, main
   }));
 }
@@ -368,6 +415,33 @@ ${ctaBand(`${s.short} ihtiyacınız mı var?`, 'Arayın, ekibimiz konumunuza yö
     const c = serviceContent[s.slug];
     return `<a class="svc-card" href="${s.url}"><div class="svc-img">${picture({ desktop: s.image + '.webp', alt: `${s.name} - ${BUSINESS.name}` })}</div><div class="svc-body"><span class="svc-ic">${icon(s.icon)}</span><h2>${esc(s.name)}</h2><p>${esc(c.excerpt)}</p><span class="more">Detayları Gör ${icon('arrow')}</span></div></a>`;
   }).join('');
+
+  const serviceSteps = [
+    ['İhtiyaç Analizi & Doğru Donanım', 'Arıza, kaza, akü bitmesi ya da kapalı otopark durumunuza göre en uygun çekici aracı ve ekipman belirlenir.'],
+    ['En Yakın Ekibin Sevki', 'Donanımlı nöbetçi aracımız bulunduğunuz lokasyona vakit kaybetmeden sevk edilir.'],
+    ['Güvenli Yükleme & Yerinde Destek', 'Akü takviyesi yerinde tamamlanır; çekilecek araçlar 4 noktadan lashing kayışlarıyla kasaya sabitlenir.'],
+    ['Adrese Teslim & Resmi Belgeleme', 'Aracınız yetkili servise ya da belirttiğiniz adrese güvenle indirilir; teslim tutanağı ve faturası verilir.']
+  ].map((s, i) => `<li><span class="num">${i + 1}</span><h3>${s[0]}</h3><p>${s[1]}</p></li>`).join('');
+
+  const serviceWhy = [
+    ['truck', 'Hidrolik Sıfır Eğim Platform', 'Tampon ve karter sürtmelerini engelleyen hidrolik kayar kasa sistemi.'],
+    ['bolt', 'Akım Korumalı Dijital Booster', 'Araç beyin ve elektronik aksamını koruyan 12V/24V regüleli profesyonel takviye.'],
+    ['park', 'Alçak Tavan Kapalı Otopark Aracı', '1.95m tavan yüksekliğine sahip AVM ve rezidans otoparklarına uygun kurtarıcı.'],
+    ['shield', '%100 Taşıma & Emtia Kaskosu', 'Taşınan her araç yasal nakliye sigortası teminatı altında güvenle nakledilir.'],
+    ['tag', 'Telefonda Sabit Fiyat Güvencesi', 'Yola çıkmadan önce net fiyat verilir, varışta veya yükleme sonrası ek maliyet çıkarılmaz.'],
+    ['receipt', 'Mobil POS & Kurumsal Fatura', 'Kredi kartı veya havale ile ödeme kolaylığı, şirket araçları için KDV\'li fatura.']
+  ].map(w => `<li><span class="why-ic">${icon(w[0])}</span><div><h3>${w[1]}</h3><p>${w[2]}</p></div></li>`).join('');
+
+  const serviceGallery = GALLERY.slice(0, 8).map(g => `<button type="button" class="g-item" data-lightbox="/images/${g[0]}.webp" data-alt="${esc(g[1])}"><img src="/images/${g[0]}.webp" width="720" height="960" alt="${esc(g[1])}" loading="lazy" decoding="async"></button>`).join('');
+
+  const serviceFaqs = [
+    { q: 'Aracıma hangi hizmetin uygun olduğunu nasıl belirliyorsunuz?', a: 'Çağrı merkezimizi aradığınızda araç modeli, şanzıman tipi, yürür durumu ve bulunduğu zemin bilgisi alınarak hidrolik kayar kasa, ahtapot vinç ya da yerinde müdahale aracı seçilir.' },
+    { q: 'Otomatik vitesli ve elektrikli araçlar nasıl çekilir?', a: 'Otomatik vites ve elektrikli araçlar kesinlikle tekerlekleri dönerek çekilmez. Hidrolik kayar kasaya vinç yardımıyla veya tekerlek patenleriyle tamamen yüklenerek taşınır.' },
+    { q: 'Yerinde akü takviyesi aracımın beynine zarar verir mi?', a: 'Hayır. Ekiplerimiz amatör kablolar yerine voltaj regülatörlü dijital booster cihazları kullanır; pik akım koruması sayesinde araç beyni korunur.' },
+    { q: 'Şehirlerarası oto çekici ve araç taşıma yapıyor musunuz?', a: 'Evet. İstanbul içi operasyonların yanı sıra Türkiye\'nin tüm illerine çift yönlü, sigortalı ve kaskolu araç taşıma hizmeti sağlıyoruz.' },
+    { q: 'Hizmet bedelini kredi kartı ile ödeyebilir miyim?', a: 'Evet. Araçlarımızda mobil POS cihazı bulunmaktadır. Kredi kartı, banka kartı, havale ya da nakit ile ödeme yapabilirsiniz.' }
+  ];
+
   const main = `
 <section class="page-hero"><div class="container">
   ${P.breadcrumbHtml(crumbs)}
@@ -376,10 +450,30 @@ ${ctaBand(`${s.short} ihtiyacınız mı var?`, 'Arayın, ekibimiz konumunuza yö
   ${ctaButtons(null)}
 </div></section>
 <section class="section"><div class="container"><div class="svc-grid">${cards}</div></div></section>
+<section class="section alt" id="nasil-calisiyoruz"><div class="container">
+  <div class="sec-head"><h2>Nasıl Çalışıyoruz? Hizmet İşleyiş Adımları</h2><p>İhtiyacınıza en uygun ekipmanı dakikalar içinde kapınıza getiriyoruz.</p></div>
+  <ol class="steps-flow">${serviceSteps}</ol>
+</div></section>
+<section class="section" id="neden-biz"><div class="container why-grid">
+  <div class="why-photo">
+    ${picture({ desktop: 'kurtarma-vinc.webp', alt: 'Bağcılar Oto Çekici uzman kurtarma ekipmanları', w: 720, h: 960 })}
+    <div class="why-stat"><strong>9 Uzman</strong><span>Farklı Hizmet Donanımı</span></div>
+  </div>
+  <div>
+    <div class="sec-head left"><h2>Neden ${esc(BUSINESS.name)}?</h2><p>Geniş filo altyapımız ve uzman operatörlerimizle kaliteli hizmet sunuyoruz.</p></div>
+    <ul class="why-list">${serviceWhy}</ul>
+  </div>
+</div></section>
+<section class="section alt" id="galeri"><div class="container">
+  <div class="sec-head"><h2>Gerçek Saha Operasyonları</h2><p>Farklı araç tiplerinde gerçekleştirdiğimiz saha çalışmalarından görüntüler.</p></div>
+  <div class="gallery-grid">${serviceGallery}</div>
+  <p class="center" style="margin-top:1.5rem;"><a class="btn btn-outline" href="/galeri.html">Tüm Galeriyi İncele ${icon('arrow')}</a></p>
+</div></section>
+<section class="section" id="sss"><div class="container narrow">${P.faqBlock(serviceFaqs, 'Hizmetlerimiz Hakkında Sıkça Sorulan Sorular')}</div></section>
 ${ctaBand('Hangi hizmet gerekiyor emin değil misiniz?', 'Durumu anlatın, size doğru ekipmanı biz seçelim.')}
 `;
   write('hizmetler/index.html', P.page({
-    headHtml: P.head({ title: 'Oto Çekici ve Yol Yardım Hizmetleri | Bağcılar 7/24', description: 'Bağcılar kayar kasa oto çekici, oto kurtarma, akü takviye, lastik yardım, motosiklet ve ticari araç çekici. Tüm hizmetler 7/24, fiyat telefonda net.', path: '/hizmetler/', schema: [P.breadcrumbSchema(crumbs)] }),
+    headHtml: P.head({ title: 'Oto Çekici ve Yol Yardım Hizmetleri | Bağcılar 7/24', description: 'Bağcılar kayar kasa oto çekici, oto kurtarma, akü takviye, lastik yardım, motosiklet ve ticari araç çekici. Tüm hizmetler 7/24, fiyat telefonda net.', path: '/hizmetler/', schema: [P.breadcrumbSchema(crumbs), P.faqSchema(serviceFaqs)] }),
     ctx: { active: 'services' }, main
   }));
 }
@@ -422,6 +516,30 @@ ${ctaBand('Çekiciye mi ihtiyacınız var?', 'Arayın ya da WhatsApp\'tan konum 
 
   const crumbs = [['Ana Sayfa', '/'], ['Blog', '/blog/']];
   const cards = posts.map(p => `<a class="blog-card" href="${p.url}"><img src="/images/${p.cover}" width="720" height="960" alt="${esc(p.title)}" loading="lazy" decoding="async"><div><span class="meta">${dateTr(p.date)} · ${p.readMinutes} dk okuma</span><h2>${esc(p.title)}</h2><p>${esc(p.excerpt)}</p></div></a>`).join('');
+
+  const blogSteps = [
+    ['Dörtlüleri Yakın ve Sağ Şeride Geçin', 'Aracınız arızalandığında panik yapmadan sağ şeride veya emniyet şeridine yanaşın, dörtlü flaşörleri açın.'],
+    ['İkaz Reflektörünü Doğru Mesafeye Koyun', 'Şehir içinde 30 metre, otoyolda en az 100-150 metre geriye reflektör yerleştirerek arkadan gelen araçları uyarın.'],
+    ['Can Güvenliğini Sağlayıp Bariyer Arkasına Geçin', 'Araç içinde oturmayın; tüm yolcuları çelik bariyerlerin arkasına alarak güvenli alanda bekleyin.'],
+    ['Canlı Konum ile Çekici Çağırın', '0545 256 55 20 numaramızı arayarak durumu bildirin ve WhatsApp üzerinden canlı konum gönderin.']
+  ].map((s, i) => `<li><span class="num">${i + 1}</span><h3>${s[0]}</h3><p>${s[1]}</p></li>`).join('');
+
+  const blogWhy = [
+    ['bulb', 'Gerçek Saha Deneyimi', 'Yılların kurtarma tecrübesiyle hazırlanan, sürücülere yolda rehberlik eden pratik bilgiler.'],
+    ['alert', 'Doğru Bilinen Yanlışlar', 'Akü takviyesi ve otomatik vites çekiminde sık yapılan ve masraf açan hataların analizi.'],
+    ['route', 'Otoyol Emniyet Kuralları', 'Basın Ekspres ve TEM otoyolu gibi yoğun yollarda hayat kurtaran güvenlik adımları.'],
+    ['tag', 'Fiyat ve Hak Bilinci', 'Çekici çağırırken dikkat edilmesi gereken tarife ve fatura standartları rehberi.'],
+    ['shield', 'Kaza ve Sigorta Rehberi', 'Kaza tespit tutanağı doldururken yapılan eksiklikler ve kasko hakları hakkında tavsiyeler.'],
+    ['phone', '7/24 Kesintisiz Telefon Danışmanlığı', 'Yolda kaldığınızda teknik destek ve doğru yönlendirme için günün her saati arayabilirsiniz.']
+  ].map(w => `<li><span class="why-ic">${icon(w[0])}</span><div><h3>${w[1]}</h3><p>${w[2]}</p></div></li>`).join('');
+
+  const blogFaqs = [
+    { q: 'Otoyolda aracım bozulduğunda ilk ne yapmalıyım?', a: 'Dörtlü flaşörleri yakın, aracı emniyet şeridine çekin, reflektörü en az 100 metre geriye koyun ve tüm yolcularla birlikte çelik bariyerin arkasında bekleyin.' },
+    { q: 'WhatsApp\'tan çekiciye canlı konum nasıl atılır?', a: 'WhatsApp sohbetinde ataş simgesine (iPhone\'da + simgesine) basıp \'Konum\' ve \'Mevcut Konumu Paylaş\' seçeneğini seçerek net koordinatınızı paylaşabilirsiniz.' },
+    { q: 'Otomatik vitesli arabayı boşa alıp başka araçla çekebilir miyiz?', a: 'Kesinlikle tavsiye edilmez. Otomatik şanzıman pompası çalışmadığı için dişliler yağsız kalır ve yüksek masraflı şanzıman arızası oluşur; kayar kasaya yüklenmelidir.' },
+    { q: 'Kaza tutanağı doldururken en sık yapılan hata nedir?', a: 'Kazalı araçların konumunu ve plakalarını gösteren fotoğrafların araçlar kımıldatılmadan önce çekilmemesi ve karşı tarafın ruhsat/sigorta bilgilerinin eksik yazılmasıdır.' }
+  ];
+
   const main = `
 <section class="page-hero"><div class="container">
   ${P.breadcrumbHtml(crumbs)}
@@ -429,10 +547,33 @@ ${ctaBand('Çekiciye mi ihtiyacınız var?', 'Arayın ya da WhatsApp\'tan konum 
   <p class="lead">Çekici çağırmadan önce bilmeniz gerekenleri, sahada gördüğümüz durumlara göre yazdık.</p>
 </div></section>
 <section class="section"><div class="container"><div class="blog-grid">${cards}</div></div></section>
+<section class="section alt" id="guvenlik-rehberi"><div class="container">
+  <div class="sec-head"><h2>Yolda Kalınca İlk 5 Dakika Güvenlik Adımları</h2><p>Aracınız arıza yaptığında veya kaza durumunda can güvenliğinizi korumak için izlemeniz gereken adımlar.</p></div>
+  <ol class="steps-flow">${blogSteps}</ol>
+</div></section>
+<section class="section" id="neden-biz"><div class="container why-grid">
+  <div class="why-photo">
+    ${picture({ desktop: 'e-5-cekici.webp', alt: 'Otoyol çekici ve yol yardım rehberi', w: 720, h: 960 })}
+    <div class="why-stat"><strong>12+ Yıl</strong><span>Saha Bilgisi &amp; Uzmanlık</span></div>
+  </div>
+  <div>
+    <div class="sec-head left"><h2>Neden Bizim Rehberlerimiz?</h2><p>Teorik bilgiler yerine sahadan edindiğimiz gerçek deneyimleri paylaşıyoruz.</p></div>
+    <ul class="why-list">${blogWhy}</ul>
+  </div>
+</div></section>
+<section class="section alt" id="hizli-rehber"><div class="container">
+  <div class="sec-head"><h2>Hızlı Hizmet &amp; Yol Yardım Rehberi</h2><p>Acil ihtiyaç duyabileceğiniz temel kurtarma ve destek hizmetlerimiz.</p></div>
+  <div class="svc-grid">
+    <a class="svc-card" href="/hizmetler/oto-cekici.html"><div class="svc-body"><h3>${icon('truck')} Kayar Kasa Oto Çekici</h3><p>Binek, SUV ve elektrikli araçlar için sıfır hasarlı taşıma.</p><span class="more">İncele ${icon('arrow')}</span></div></a>
+    <a class="svc-card" href="/hizmetler/aku-takviye.html"><div class="svc-body"><h3>${icon('bolt')} Akü Takviye &amp; Yol Yardım</h3><p>12V/24V pik akım korumalı cihazlarla 15 dakikada yerinde takviye.</p><span class="more">İncele ${icon('arrow')}</span></div></a>
+    <a class="svc-card" href="/hizmetler/kapali-otopark-cekici.html"><div class="svc-body"><h3>${icon('park')} Kapalı Otopark Çekici</h3><p>AVM ve rezidans otoparkları için alçak tavanlı özel kurtarıcı.</p><span class="more">İncele ${icon('arrow')}</span></div></a>
+  </div>
+</div></section>
+<section class="section" id="sss"><div class="container narrow">${P.faqBlock(blogFaqs, 'Sürücü Rehberi Sıkça Sorulan Sorular')}</div></section>
 ${ctaBand('Acil yardım mı gerekiyor?', 'Okumayı sonraya bırakın, önce arayın.')}
 `;
   write('blog/index.html', P.page({
-    headHtml: P.head({ title: 'Çekici ve Yol Yardım Rehberi | Bağcılar Oto Çekici Blog', description: 'Çekici fiyatları, akü takviye, elektrikli araç taşıma, otoyol güvenliği ve kaza sonrası adımlar. Bağcılar çekici ekibinden sürücü rehberi yazıları.', path: '/blog/', schema: [P.breadcrumbSchema(crumbs)] }),
+    headHtml: P.head({ title: 'Çekici ve Yol Yardım Rehberi | Bağcılar Oto Çekici Blog', description: 'Çekici fiyatları, akü takviye, elektrikli araç taşıma, otoyol güvenliği ve kaza sonrası adımlar. Bağcılar çekici ekibinden sürücü rehberi yazıları.', path: '/blog/', schema: [P.breadcrumbSchema(crumbs), P.faqSchema(blogFaqs)] }),
     ctx: { active: 'blog' }, main
   }));
 }
@@ -441,30 +582,161 @@ ${ctaBand('Acil yardım mı gerekiyor?', 'Okumayı sonraya bırakın, önce aray
 function buildStatic() {
   // Galeri
   let crumbs = [['Ana Sayfa', '/'], ['Galeri', '/galeri.html']];
+
+  const gallerySteps = [
+    ['Trafik & Çevre Emniyeti', 'Olay yerinde tepe flaşörleri ve trafik konileriyle güvenlik çemberi oluşturulur.'],
+    ['Açı Ayarı & Hassas Rampa', 'Hidrolik kayar kasa zemine sıfır dereceye yakın indirilir, rampa açısı araca göre ayarlanır.'],
+    ['4 Noktadan Kayışlı Sabitleme', 'Jantlara ve alt takıma zarar vermeyen korumalı lashing kayışlarıyla araç kasaya kilitlenir.'],
+    ['Kaskolu & Hasarsız Ulaşım', 'Sarsıntısız sürüşle hedefe varılır; araç teslim noktasında aynı hassasiyetle indirilir.']
+  ].map((s, i) => `<li><span class="num">${i + 1}</span><h3>${s[0]}</h3><p>${s[1]}</p></li>`).join('');
+
+  const galleryWhy = [
+    ['truck', 'Sıfır Açılı Hidrolik Platform', 'Yere tam oturan kayar kasa ile spor ve modifiyeli araçlarda bile sıfır sürtme.'],
+    ['life', 'Özel Korumalı Jant Kayışları', 'Jant boyasını çizmeyen, fren sistemine baskı yapmayan özel tekstil kayışlar.'],
+    ['users', 'Sertifikalı Operatör Kadrosu', 'Vinç kullanımı, dar alan manevrası ve kaza kurtarma alanında tecrübeli personel.'],
+    ['shield', 'Tam Kapsamlı Taşıma Kaskosu', 'Kasaya yüklenen her araç nakliye sigortası poliçesiyle güvence altındadır.'],
+    ['park', 'Alçak Kabinli Manevra Kabiliyeti', 'Dar sokaklarda ve tavanı alçak kapalı otoparklarda seri hareket kabiliyeti.'],
+    ['receipt', 'Fotoğraflı Teslim Tutanağı', 'Araç teslim alınırken ve teslim edilirken karşılıklı güven esasıyla kayıt tutulur.']
+  ].map(w => `<li><span class="why-ic">${icon(w[0])}</span><div><h3>${w[1]}</h3><p>${w[2]}</p></div></li>`).join('');
+
+  const galleryFaqs = [
+    { q: 'Galerideki fotoğraflar kendi çalışmalarınıza mı ait?', a: 'Evet. Web sitemizde ve galerimizde paylaşılan tüm fotoğraflar Bağcılar ve çevresinde yürüttüğümüz gerçek kurtarma ve çekici operasyonlarına aittir.' },
+    { q: 'Aracım çekiciye yüklenirken tampon veya karter sürtmesi olur mu?', a: 'Hayır. Hidrolik kayar kasalarımız yere sıfır dereceye yakın açıyla indiği için alçak spor araçlar dahi en ufak sürtme yaşamadan yüklenir.' },
+    { q: 'Tekerleği kilitli veya kazalı araçlar nasıl yükleniyor?', a: 'Şanzımanı kilitli ya da tekerlekleri dönmeyen araçlar için makaralı hidrolik vinç ve tekerlek altı kayar patenler kullanılarak araç hasarsız şekilde kasaya alınır.' },
+    { q: 'Taşıma sırasında aracıma bir zarar gelirse sorumluluk kime aittir?', a: 'Çekiciye yükleme başladığı andan teslimata kadar tüm süreç %100 taşıma ve emtia kaskomuzun teminatı altındadır; tüm sorumluluk firmamıza aittir.' }
+  ];
+
   write('galeri.html', P.page({
-    headHtml: P.head({ title: 'Çekici Galerisi | Bağcılar Oto Çekici Saha Operasyonları', description: 'Bağcılar çekici filosundan gerçek saha operasyonları: kayar kasa ile araç taşıma, akü takviye, lastik yardım, motosiklet ve ticari araç kurtarma kareleri.', path: '/galeri.html', schema: [P.breadcrumbSchema(crumbs)] }),
+    headHtml: P.head({ title: 'Çekici Galerisi | Bağcılar Oto Çekici Saha Operasyonları', description: 'Bağcılar çekici filosundan gerçek saha operasyonları: kayar kasa ile araç taşıma, akü takviye, lastik yardım, motosiklet ve ticari araç kurtarma kareleri.', path: '/galeri.html', schema: [P.breadcrumbSchema(crumbs), P.faqSchema(galleryFaqs)] }),
     ctx: { active: 'gallery' },
-    main: `<section class="page-hero"><div class="container">${P.breadcrumbHtml(crumbs)}<h1>Gerçek Saha Operasyonları</h1><p class="lead">Fotoğraflara tıklayarak büyütebilirsiniz.</p></div></section>
+    main: `<section class="page-hero"><div class="container">${P.breadcrumbHtml(crumbs)}<h1>Gerçek Saha Operasyonları</h1><p class="lead">Fotoğraflara tıklayarak büyütebilirsiniz. Tüm kareler kendi çekici filomuza aittir.</p></div></section>
 <section class="section"><div class="container"><div class="gallery-grid">${GALLERY.map(g => `<button type="button" class="g-item" data-lightbox="/images/${g[0]}.webp" data-alt="${esc(g[1])}"><img src="/images/${g[0]}.webp" width="720" height="960" alt="${esc(g[1])}" loading="lazy" decoding="async"></button>`).join('')}</div></div></section>
-${ctaBand('Aracınız için çekici mi lazım?', 'Aramanız yeterli.')}`
+<section class="section alt" id="nasil-calisiyoruz"><div class="container">
+  <div class="sec-head"><h2>Nasıl Çalışıyoruz? Saha Güvenlik Prosedürleri</h2><p>Aracınızın yükleme ve taşıma adımlarında uyguladığımız kurumsal standartlar.</p></div>
+  <ol class="steps-flow">${gallerySteps}</ol>
+</div></section>
+<section class="section" id="neden-biz"><div class="container why-grid">
+  <div class="why-photo">
+    ${picture({ desktop: 'otomobil-cekici-1.webp', alt: 'Bağcılar çekici aracı ile araç kurtarma', w: 720, h: 960 })}
+    <div class="why-stat"><strong>%100</strong><span>Kaskolu Saha Operasyonu</span></div>
+  </div>
+  <div>
+    <div class="sec-head left"><h2>Neden Biz? Donanım ve Saha Güvencelerimiz</h2><p>Saha operasyonlarımızda araç güvenliğini en üst seviyede tutuyoruz.</p></div>
+    <ul class="why-list">${galleryWhy}</ul>
+  </div>
+</div></section>
+<section class="section alt" id="sss"><div class="container narrow">${P.faqBlock(galleryFaqs, 'Galeri ve Operasyonlar Hakkında Sıkça Sorulan Sorular')}</div></section>
+${ctaBand('Aracınız için çekici mi lazım?', 'Aramanız yeterli; 10-15 dakikada yanınızdayız.')}`
   }));
 
   // Hakkımızda
   crumbs = [['Ana Sayfa', '/'], ['Hakkımızda', '/hakkimizda.html']];
+
+  const aboutFaqs = [
+    { q: 'Taşıma kaskosu neleri kapsar?', a: 'Aracınız çekiciye yüklenmeye başlandığı andan servise ya da teslim adresine indirilene kadar %100 taşıma ve emtia kaskosu teminatı altındadır. Olası kaza, sürtme ya da hasar durumlarında tüm sorumluluk firmamıza ve sigorta poliçemize aittir.' },
+    { q: 'Telefonda söylediğiniz fiyat daha sonra değişir mi?', a: 'Kesinlikle değişmez. Bağcılar Oto Çekici olarak aradığınızda araç tipi, konum ve teslim noktasını alarak net fiyat veririz. Aracınız yüklendikten sonra sürpriz ek masraf veya yol parası talep edilmez.' },
+    { q: 'Kurumsal firmalar ve şirket araçları için fatura kesiyor musunuz?', a: 'Evet. Filomuzdaki tüm işlemler yasaldır; KDV\'li kurumsal fatura düzenliyoruz. Şirket araçları ve filo kiralama firmaları için mobil POS ile kredi kartı veya banka havalesi kabul edilir.' },
+    { q: 'Gece yarısı veya resmi tatillerde fiyat katlanır mı?', a: 'Hayır. 7/24 nöbetçi sistemimiz olduğu için gece, hafta sonu veya bayram günlerinde şeffaf ve adil tarife politikamız devam eder. Fiyatı aradığınızda açıkça teyit edebilirsiniz.' },
+    { q: 'Elektrikli veya otomatik vitesli araçlar için özel ekipmanınız var mı?', a: 'Evet. Otomatik vitesli, elektrikli ve elektronik el freni kilitli araçları tekerlekleri yerde sürüklemeden, kayar kasa platformuna özel kızak ve tekerlek altı aparatlarla sıfır hasarla yüklüyoruz.' }
+  ];
+
+  const fleetEquipments = [
+    { title: 'Hidrolik Kayar Kasa Çekiciler', img: 'otomobil-cekici-1', desc: 'Sıfır açılı hidrolik platform sayesinde yere tam oturur. Alçak spor araçlar, binek otomobiller ve SUV modelleri tampon sürtmesi olmadan tamamen kasaya alınır.', feats: ['Sıfır eğim açısı', '4 noktadan jant bağlama', 'Hasarsız hidrolik makara'] },
+    { title: 'Ahtapot & Vinçli Kurtarıcılar', img: 'kurtarma-vinc', desc: 'Şanzımanı kilitli, tekerleği dönmeyen veya dar sokaklarda manevra alanı olmayan araçlar tekerleklerinden askı aparatı ile kaldırılarak taşınır.', feats: ['Tekerlekten kilitli askı', 'Şanzımana sıfır yük', 'Dar alan vinçli müdahale'] },
+    { title: 'Kapalı Otopark Çekicisi', img: 'arac-cekici', desc: 'AVM, plaza ve rezidansların 1.90m - 2.10m alçak tavanlı kapalı garajlarına girebilen özel alçak kabinli kurtarma aracı.', feats: ['Alçak kabin tasarımı', 'Dar rampa kabiliyeti', 'Yeraltı garaj müdahalesi'] },
+    { title: 'Ticari & Ağır Hizmet Taşıyıcıları', img: 'ticari-cekici-1', desc: 'Minibüs, panelvan, uzun şasi kamyonet ve hafif ticari araçlar için güçlendirilmiş çelik şasi ve yüksek tonajlı taşıma kapasitesi.', feats: ['Yüksek taşıma tonajı', 'Uzun şasi uyumu', 'Hafif ticari filosu'] },
+    { title: 'Mobil Yol Yardım & Akü Donanımı', img: 'aku-takviye', desc: '12V/24V pik akım korumalı dijital booster ile yerinde akü takviyesi, profesyonel bijon sökme ve lastik yol yardım ekipmanı.', feats: ['Dijital voltaj regülatörü', 'Elektrikli beyin koruması', 'Yerinde 15 dk müdahale'] }
+  ];
+
+  const corporateGuarantees = [
+    ['shield', '%100 Taşıma Kaskosu', 'Yükleme anından teslimata kadar aracınız tam kapsamlı taşıma kaskosu ile sigortalanır.'],
+    ['tag', 'Telefonda Sabit Fiyat', 'Yola çıkmadan önce onaylanan fiyat geçerlidir; varışta ya da yüklemede ek ücret çıkarılmaz.'],
+    ['truck', 'Sıfır Hasar Protokolü', 'Özel korumalı jant kayışları ve profesyonel bağlama aparatlarıyla kaporta ve mekaniğe dokunulmaz.'],
+    ['receipt', 'Mobil POS & Resmi Fatura', 'Şirketler ve şahıslar için yerinde kredi kartı ile ödeme ve yasal KDV\'li fatura.'],
+    ['users', '7/24 Kesintisiz Nöbetçi Kadro', 'Yılın 365 günü gece ve gündüz direksiyon başında hazır bekleyen yerel personel.'],
+    ['route', 'Bölgesel Güzergah Hakimiyeti', 'Bağcılar sokaklarını, sanayi sitelerini ve otoyol arterlerini en iyi bilen yerel ekip.']
+  ];
+
+  const aboutMain = `
+<section class="page-hero"><div class="container">
+  ${P.breadcrumbHtml(crumbs)}
+  <span class="eta-badge"><span class="pulse-dot"></span>Avrupa Yakası 7/24 Lisanslı &amp; Kaskolu Çekici Filosu</span>
+  <h1>Hakkımızda: Bağcılar Oto Çekici &amp; Yol Yardım Filosu</h1>
+  <p class="lead">Bağcılar merkezli modern çekici filomuz, 12 yılı aşkın saha tecrübemiz ve %100 kaskolu taşıma güvencemizle Avrupa Yakası genelinde 7/24 kesintisiz hizmet veriyoruz.</p>
+  ${statsRow()}
+</div></section>
+
+<section class="section" id="biz-kimiz"><div class="container why-grid">
+  <div class="why-photo">
+    ${picture({ desktop: 'otomobil-cekici-2.webp', alt: 'Bağcılar Çekici Filosu ve Operasyon Ekibi', w: 720, h: 960 })}
+    <div class="why-stat"><strong>12+ Yıl</strong><span>Saha Tecrübesi &amp; Güven</span></div>
+  </div>
+  <div>
+    <div class="sec-head left"><h2>Biz Kimiz? Dürüst Esnaflık ve Güvenilir Yol Arkadaşınız</h2>
+    <p>${BUSINESS.name}, 10 yılı aşkın süredir Bağcılar merkezli olarak İstanbul Avrupa Yakası genelinde oto çekici, oto kurtarma ve yol yardım hizmeti sunan profesyonel bir çekici kuruluşudur.</p></div>
+    <p style="margin-bottom:1rem;color:var(--muted);line-height:1.65;">Kuruluşumuzdan bu yana temel ilkemiz; yolda kalan sürücülere zor anlarında dürüst esnaflık ahlakıyla yaklaşmak, telefonda net ve değişmeyen fiyat garantisi vermek ve araçları sıfır hasar prensibiyle taşımaktır. Bağcılar mahallelerinden Basın Ekspres, TEM ve E-5 bağlantılarına, İSTOÇ ve İkitelli sanayi sitelerine kadar geniş bir sahada 7/24 nöbetçi araçlarımızla görev yapıyoruz.</p>
+    <p style="color:var(--muted);line-height:1.65;">Gelişmiş hidrolik kayar kasa filomuz, alçak tavanlı otopark kurtarıcılarımız ve akım korumalı takviye cihazlarımız ile her senaryoya hazırlıklı tam donanımlı bir acil müdahale filosuyuz.</p>
+  </div>
+</div></section>
+
+<section class="section alt" id="filomuz"><div class="container">
+  <div class="sec-head"><h2>Modern Araç Filomuz &amp; Donanım Altyapımız</h2><p>Her araç tipi ve arıza durumu için özel olarak donatılmış kurtarma araçlarımızla hizmetinizdeyiz.</p></div>
+  <div class="svc-grid">
+    ${fleetEquipments.map(e => `
+      <div class="svc-card">
+        <div class="svc-img">${picture({ desktop: e.img + '.webp', w: 720, h: 960, alt: `${e.title} - ${BUSINESS.name}` })}</div>
+        <div class="svc-body">
+          <h3>${esc(e.title)}</h3>
+          <p>${esc(e.desc)}</p>
+          <ul class="mini-list">${e.feats.map(f => `<li>${icon('check')}${esc(f)}</li>`).join('')}</ul>
+        </div>
+      </div>
+    `).join('')}
+  </div>
+</div></section>
+
+<section class="section" id="nasil-calisiyoruz"><div class="container">
+  <div class="sec-head"><h2>Nasıl Çalışıyoruz? 4 Aşamalı Kurumsal Süreç</h2><p>Şeffaf, planlı ve sürpriz maliyet barındırmayan profesyonel iş akışımız.</p></div>
+  <ol class="steps-flow">
+    <li><span class="num">1</span><h3>İhbar &amp; Sabit Fiyat</h3><p>Aradığınızda araç modelini ve konumunuzu alarak çekici yola çıkmadan önce net ve bağlayıcı fiyatı bildiririz.</p></li>
+    <li><span class="num">2</span><h3>10-15 Dk Hızlı İntikal</h3><p>Bağcılar ve çevre bağlantı noktalarındaki nöbetçi ekibimiz en kısa güzergah üzerinden konumunuza ulaşır.</p></li>
+    <li><span class="num">3</span><h3>Kaskolu &amp; Hasarsız Yükleme</h3><p>Hidrolik kayar platforma alınan aracınız 4 noktadan özel jant kayışlarıyla kasaya güvenle kilitlenir.</p></li>
+    <li><span class="num">4</span><h3>Servise Teslim &amp; Fatura</h3><p>Aracınız varış noktasında hasarsız indirilir; mobil POS ile ödeme alınıp KDV'li kurumsal fatura kesilir.</p></li>
+  </ol>
+</div></section>
+
+<section class="section alt" id="guvenceler"><div class="container">
+  <div class="sec-head"><h2>Müşteri Güvencelerimiz &amp; Kurumsal Standartlarımız</h2><p>Bizi bölgenin en çok tercih edilen oto çekici firması yapan somut güvenceler.</p></div>
+  <div class="svc-grid">
+    ${corporateGuarantees.map(g => `
+      <div class="svc-card" style="padding:1.25rem;">
+        <div style="display:flex;align-items:center;gap:12px;margin-bottom:0.75rem;">
+          <span class="why-ic">${icon(g[0])}</span>
+          <h3 style="margin:0;font-size:1.1rem;">${esc(g[1])}</h3>
+        </div>
+        <p style="margin:0;font-size:0.92rem;color:var(--muted);">${esc(g[2])}</p>
+      </div>
+    `).join('')}
+  </div>
+</div></section>
+
+<section class="section" id="galeri-onizleme"><div class="container">
+  <div class="sec-head"><h2>Gerçek Saha Operasyonlarımız</h2><p>Filomuzun sahadaki araç kurtarma, nakliye ve yol yardım çalışmalarından kareler.</p></div>
+  <div class="gallery-grid">
+    ${GALLERY.slice(0, 8).map(g => `<button type="button" class="g-item" data-lightbox="/images/${g[0]}.webp" data-alt="${esc(g[1])}"><img src="/images/${g[0]}.webp" width="720" height="960" alt="${esc(g[1])}" loading="lazy" decoding="async"></button>`).join('')}
+  </div>
+  <p class="center" style="margin-top:1.5rem;"><a class="btn btn-outline" href="/galeri.html">Tüm Galeriyi İncele ${icon('arrow')}</a></p>
+</div></section>
+
+<section class="section alt" id="sss"><div class="container narrow">${P.faqBlock(aboutFaqs, 'Kurumsal Sıkça Sorulan Sorular')}</div></section>
+
+${ctaBand('Aracınız için güvenilir çekici ekibi mi arıyorsunuz?', '0545 256 55 20 numaralı hattımızdan 7/24 bize ulaşabilir, net fiyat ve varış süresi alabilirsiniz.')}
+`;
+
   write('hakkimizda.html', P.page({
-    headHtml: P.head({ title: 'Hakkımızda | Bağcılar Oto Çekici & Yol Yardım', description: 'Bağcılar Oto Çekici; kayar kasa filosu, 7/24 nöbetçi ekibi, telefonda net fiyat ve taşıma kaskosuyla Avrupa Yakası’nda çekici ve yol yardım hizmeti verir.', path: '/hakkimizda.html', schema: [P.breadcrumbSchema(crumbs)] }),
+    headHtml: P.head({ title: 'Hakkımızda | Bağcılar Oto Çekici & Yol Yardım Filosu', description: 'Bağcılar Oto Çekici; kayar kasa filosu, 7/24 nöbetçi ekibi, telefonda net fiyat ve %100 taşıma kaskosuyla Avrupa Yakası’nda kurumsal oto çekici ve yol yardım hizmeti verir.', path: '/hakkimizda.html', schema: [P.breadcrumbSchema(crumbs), P.orgSchema(), P.faqSchema(aboutFaqs)] }),
     ctx: { active: 'about' },
-    main: `<section class="page-hero"><div class="container">${P.breadcrumbHtml(crumbs)}<h1>Hakkımızda</h1><p class="lead">Bağcılar'da kurulu, Avrupa Yakası'nda çalışan oto çekici ve yol yardım ekibi.</p></div></section>
-<div class="container content-grid"><article class="prose">
-<section class="prose-sec"><h2>Ne yapıyoruz?</h2>
-<p>${BUSINESS.name}, Bağcılar merkezli çalışan bir oto çekici ve yol yardım ekibidir. Bağcılar mahallelerinden Esenler, Başakşehir, Küçükçekmece, Bahçelievler ve Merter hattına; İSTOÇ, İkitelli ve Tekstilkent gibi sanayi bölgelerine kadar uzanan alanda araçları yoldan alıp servise, eve ya da otoparka ulaştırıyoruz.</p>
-<p>Filomuz ağırlıklı olarak kayar kasa çekicilerden oluşuyor. Bu sayede binek araç, SUV, elektrikli araç, motosiklet ve hafif ticari araçları tekerleği yerde sürümeden, tamamen kasaya alarak taşıyabiliyoruz. Kapalı otopark gibi alçak tavanlı alanlar, ahtapot aparatı gereken dar yerler ve akü takviye gibi yerinde müdahale gereken durumlar için ayrı ekipmanlarımız var.</p></section>
-<section class="prose-sec"><h2>Çalışma ilkelerimiz</h2>
-<ul class="check-list"><li>Çekici yola çıkmadan önce fiyat telefonda net söylenir; yüklemeden sonra değişmez.</li><li>Taşıma sırasında aracınız %100 kasko teminatı altındadır.</li><li>Araç dört noktadan kayışla sabitlenir, şanzıman kilitli araçlarda tekerlek altı aparat kullanılır.</li><li>Nakit, havale/EFT ve mobil POS ile ödeme alınır; isteyene fatura düzenlenir.</li><li>Gece, hafta sonu ve resmi tatillerde aynı hat açıktır.</li></ul></section>
-<section class="prose-sec"><h2>Nerelere gidiyoruz?</h2>
-<p>Hizmet bölgelerimizin tam listesi için <a href="/bolgeler/">bölgeler sayfasına</a> bakabilirsiniz. Listede olmayan yakın noktalar için aramanız yeterli; konumunuza uygun ekibi yönlendiririz.</p></section>
-</article>
-<aside class="side-card"><h2>Hemen ulaşın</h2><p>7/24 açık hattımız:</p>${ctaButtons(null)}</aside></div>`
+    main: aboutMain
   }));
 
   // İletişim
