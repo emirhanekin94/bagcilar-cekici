@@ -1991,22 +1991,49 @@ textarea {
 
 /* Footer */
 .site-footer {
-  background: var(--navy);
-  color: #CBD5E1;
-  padding-top: 2.75rem;
+  background: #071322;
+  color: #94A3B8;
+  padding-top: 2.25rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .footer-grid {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 2rem;
-  padding-bottom: 2.25rem;
+  gap: 1.5rem;
+  padding-bottom: 1.75rem;
+}
+
+@media (max-width: 767px) {
+  .footer-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 1.25rem 1rem;
+    padding-bottom: 1.5rem;
+  }
+
+  .f-col.f-brand {
+    grid-column: span 2;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  }
+
+  .f-col h3 {
+    font-size: 0.88rem;
+    margin-bottom: 0.45rem;
+  }
+
+  .f-col ul a {
+    min-height: 30px;
+    font-size: 0.82rem;
+  }
 }
 
 .f-col h3 {
-  color: #FFFFFF;
-  font-size: 1rem;
-  margin-bottom: 0.85rem;
+  color: #F8FAFC;
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+  margin-bottom: 0.75rem;
 }
 
 .f-col ul {
@@ -2020,10 +2047,11 @@ textarea {
 .f-col ul a {
   display: inline-flex;
   align-items: center;
-  min-height: 44px;
-  color: #CBD5E1;
+  min-height: 38px;
+  color: #94A3B8;
   text-decoration: none;
-  font-size: 0.9rem;
+  font-size: 0.88rem;
+  transition: color 0.2s ease;
 }
 
 .f-col ul a:hover {
@@ -2032,65 +2060,109 @@ textarea {
 }
 
 .f-brand p {
-  margin: 0.9rem 0 1rem;
-  font-size: 0.9rem;
-  color: #CBD5E1;
-}
-
-.f-phone {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  min-height: 48px;
-  padding: 10px 18px;
-  background: var(--red);
-  color: #FFFFFF;
-  border-radius: var(--radius-sm);
-  font-family: var(--font-display);
-  font-weight: 700;
-  text-decoration: none;
-}
-
-.f-phone:hover {
-  background: var(--red-hover);
+  margin: 0.75rem 0 0;
+  font-size: 0.88rem;
+  line-height: 1.55;
+  color: #94A3B8;
 }
 
 .footer-bottom {
-  background: var(--navy-deep);
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
-  padding-block: 1rem;
-  font-size: 0.84rem;
+  background: #040A12;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  padding-block: 1.15rem;
+  font-size: 0.82rem;
+  color: #64748B;
 }
 
 .footer-bottom-inner {
   display: flex;
   flex-direction: column;
-  gap: 8px;
-  align-items: flex-start;
+  gap: 10px;
+  align-items: center;
+  text-align: center;
 }
 
-.footer-bottom a {
-  color: #FFFFFF;
-  min-height: 44px;
+.fb-left {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.fb-copy {
+  color: #64748B;
+}
+
+.fb-dot {
+  color: #475569;
+}
+
+.fb-link {
+  color: #94A3B8;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.2s ease;
+}
+
+.fb-link:hover {
+  color: #F8FAFC;
+  text-decoration: underline;
+}
+
+.fb-credit {
   display: inline-flex;
   align-items: center;
+  font-size: 0.78rem;
+  color: #64748B;
 }
 
-/* Sticky Bottom Bar (Mobile) -> Floating Pills (Desktop) */
+.getpin-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 3px 12px;
+  margin-left: 6px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 999px;
+  color: #CBD5E1;
+  text-decoration: none;
+  font-size: 0.78rem;
+  letter-spacing: 0.3px;
+  transition: all 0.2s ease;
+}
+
+.getpin-badge:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.2);
+  color: #FFFFFF;
+}
+
+.getpin-badge strong {
+  color: #F8FAFC;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+
+/* Sticky Bottom Bar (Mobile) -> Floating Luxury Glass Capsule */
 .sticky-actions,
 .sticky-actions.floating-actions {
   position: fixed;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  z-index: 90;
+  left: 12px;
+  right: 12px;
+  bottom: calc(10px + env(safe-area-inset-bottom));
+  z-index: 999;
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 10px;
-  padding: 10px 12px calc(10px + env(safe-area-inset-bottom));
-  background: rgba(255, 255, 255, 0.96);
-  border-top: 1px solid var(--border);
-  box-shadow: 0 -4px 18px rgba(11, 31, 58, 0.08);
+  padding: 8px 10px;
+  background: rgba(8, 14, 26, 0.88);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 18px;
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.45), 0 2px 6px rgba(0, 0, 0, 0.3);
 }
 
 .sa-call,
@@ -2100,24 +2172,39 @@ textarea {
   justify-content: center;
   gap: 8px;
   min-height: 48px;
-  border-radius: 10px;
+  border-radius: 12px;
   color: #FFFFFF;
   font-family: var(--font-display);
   font-weight: 700;
-  font-size: 0.92rem;
+  font-size: 0.88rem;
+  letter-spacing: 0.5px;
   text-decoration: none;
+  text-transform: uppercase;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+  overflow: hidden;
 }
 
 .sa-call {
-  background: var(--red);
+  background: linear-gradient(135deg, #EF4444 0%, #DC2626 50%, #B91C1C 100%);
+  box-shadow: 0 4px 14px rgba(220, 38, 38, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.15);
 }
 
-.sa-call:hover {
-  background: var(--red-hover);
+.sa-call:hover, .sa-call:active {
+  transform: translateY(-1px) scale(1.02);
+  box-shadow: 0 6px 20px rgba(220, 38, 38, 0.55), inset 0 1px 0 rgba(255, 255, 255, 0.4);
 }
 
 .sa-wa {
-  background: var(--wa-btn);
+  background: linear-gradient(135deg, #22C55E 0%, #16A34A 50%, #15803D 100%);
+  box-shadow: 0 4px 14px rgba(22, 163, 74, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.sa-wa:hover, .sa-wa:active {
+  transform: translateY(-1px) scale(1.02);
+  box-shadow: 0 6px 20px rgba(22, 163, 74, 0.55), inset 0 1px 0 rgba(255, 255, 255, 0.4);
 }
 
 .sa-wa:hover {
@@ -2444,18 +2531,20 @@ textarea {
     bottom: 24px;
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 12px;
     padding: 0;
     background: transparent;
+    border: none;
     border-top: 0;
     box-shadow: none;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
   }
 
   .sa-call,
   .sa-wa {
-    padding: 12px 20px;
+    padding: 12px 24px;
     border-radius: 999px;
-    box-shadow: 0 10px 24px rgba(11, 31, 58, 0.22);
   }
 }
 

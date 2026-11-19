@@ -49,11 +49,8 @@ function dateTr(d) {
   const [y, mo, da] = d.split('-').map(Number);
   return `${da} ${m[mo - 1]} ${y}`;
 }
-function ctaBand(title, text) {
-  return `<section class="cta-band"><div class="container cta-band-inner">
-    <div><h2>${esc(title)}</h2><p>${esc(text)}</p></div>
-    ${ctaButtons(null)}
-  </div></section>`;
+function ctaBand() {
+  return '';
 }
 const GALLERY = [
   ['otomobil-cekici-3', 'Kayar kasa çekici üzerinde yol kenarından alınan siyah sedan araç'],
@@ -332,7 +329,6 @@ ${ctaBand(`${r.name} çevresinde yolda mı kaldınız?`, 'Arayın ya da WhatsApp
   ${P.breadcrumbHtml(crumbs)}
   <h1>Hizmet Bölgelerimiz: ${REGIONS.length} Bölgede 7/24 Oto Çekici</h1>
   <p class="lead">Bağcılar merkezli nöbetçi çekici ekibimiz; Bağcılar mahallelerine, Esenler, Başakşehir, Küçükçekmece, Bahçelievler, Merter hattına ve İSTOÇ, İkitelli, Tekstilkent gibi sanayi bölgelerine doğrudan ulaşır.</p>
-  ${ctaButtons(null)}
 </div></section>
 <section class="section"><div class="container">
   <div class="chips" role="group" aria-label="Bölge filtresi">${filterBtns}</div>
@@ -380,7 +376,6 @@ function buildServicePages() {
     ${P.breadcrumbHtml(crumbs)}
     <h1>${esc(c.h1)}</h1>
     <p class="lead">${esc(c.lead)}</p>
-    ${ctaButtons(null)}
     <ul class="feat-pills">${c.features.map(f => `<li>${icon('check')}${esc(f)}</li>`).join('')}</ul>
   </div>
   <div class="hero-photo small">${picture({ desktop: s.image + '.webp', alt: `${s.name} hizmeti - ${BUSINESS.name}`, eager: true })}</div>
@@ -447,7 +442,6 @@ ${ctaBand(`${s.short} ihtiyacınız mı var?`, 'Arayın, ekibimiz konumunuza yö
   ${P.breadcrumbHtml(crumbs)}
   <h1>Oto Çekici &amp; Yol Yardım Hizmetlerimiz</h1>
   <p class="lead">Kayar kasa çekiciden akü takviyeye, kapalı otopark kurtarmadan şehirlerarası araç taşımaya kadar dokuz hizmet. Her biri için ayrı ekipman ve ayrı bir iş akışı var.</p>
-  ${ctaButtons(null)}
 </div></section>
 <section class="section"><div class="container"><div class="svc-grid">${cards}</div></div></section>
 <section class="section alt" id="nasil-calisiyoruz"><div class="container">

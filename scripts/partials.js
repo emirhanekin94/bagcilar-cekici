@@ -166,8 +166,7 @@ function footer() {
     <div class="container footer-grid">
       <div class="f-col f-brand">
         <a href="/" class="brand brand-light" aria-label="${esc(BUSINESS.name)}">${logoMark()}<span class="brand-text"><strong>${esc(BUSINESS.name.toLocaleUpperCase('tr-TR'))}</strong><small>7/24 Yol Yardım &amp; Kurtarma</small></span></a>
-        <p>Bağcılar merkezli, Avrupa Yakası'nın büyük bölümüne kayar kasa çekici ve yol yardım hizmeti veriyoruz. Araç yüklemeden önce fiyat telefonda netleşir, taşıma kaskoludur.</p>
-        <a class="f-phone" href="${telLink()}" data-track="call">${icon('phone')}<span>${BUSINESS.phoneDisplay}</span></a>
+        <p>Bağcılar merkezli, Avrupa Yakası'nda 7/24 kaskolu ve sabit fiyat güvenceli kayar kasa oto çekici filosu.</p>
       </div>
       <div class="f-col"><h3>Hizmetlerimiz</h3><ul>${sv}</ul></div>
       <div class="f-col"><h3>Popüler Bölgeler</h3><ul>${rg}</ul></div>
@@ -178,13 +177,17 @@ function footer() {
         <li><a href="/blog/">Blog</a></li>
         <li><a href="/iletisim.html">İletişim</a></li>
         <li><a href="/gizlilik-politikasi.html">Gizlilik &amp; KVKK Politikası</a></li>
-        <li><a href="${telLink()}" data-track="call">7/24 Acil İhbar Hattı</a></li>
       </ul></div>
     </div>
     <div class="footer-bottom"><div class="container footer-bottom-inner">
-      <span>© 2026 ${esc(BUSINESS.name)}. Tüm hakları saklıdır.</span>
-      <a href="/gizlilik-politikasi.html">Gizlilik Politikası &amp; KVKK</a>
-      <span>Bağcılar ve çevresinde 7/24 oto çekici &amp; yol yardım.</span>
+      <div class="fb-left">
+        <span class="fb-copy">© 2026 ${esc(BUSINESS.name)}. Tüm hakları saklıdır.</span>
+        <span class="fb-dot" aria-hidden="true">·</span>
+        <a class="fb-link" href="/gizlilik-politikasi.html">Gizlilik &amp; KVKK Politikası</a>
+      </div>
+      <div class="fb-credit">
+        <span>Crafted with precision by <a href="https://getpin.co" target="_blank" rel="noopener" class="getpin-badge">getpin</a></span>
+      </div>
     </div></div>
   </footer>`;
 }
