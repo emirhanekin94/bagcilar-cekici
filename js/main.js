@@ -201,6 +201,27 @@
     });
   });
 
+  /* ---------- Home Region Show All Toggle ---------- */
+  const toggleBtn = document.getElementById('btn-toggle-all-regions');
+  const extraGrid = document.getElementById('home-extra-regions');
+  const toggleLabel = document.getElementById('toggle-regions-label');
+  if (toggleBtn && extraGrid) {
+    toggleBtn.addEventListener('click', () => {
+      const isHidden = extraGrid.hasAttribute('hidden');
+      if (isHidden) {
+        extraGrid.removeAttribute('hidden');
+        toggleBtn.setAttribute('aria-expanded', 'true');
+        if (toggleLabel) toggleLabel.textContent = 'Daha Az Bölge Göster';
+      } else {
+        extraGrid.setAttribute('hidden', '');
+        toggleBtn.setAttribute('aria-expanded', 'false');
+        if (toggleLabel) toggleLabel.textContent = 'Tüm Bölgeleri Göster (15 Bölge)';
+        const sec = document.getElementById('bolgeler');
+        if (sec) sec.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    });
+  }
+
   /* ---------- Accessible Gallery Lightbox ---------- */
   const lbTriggers = document.querySelectorAll('[data-lightbox]');
   if (lbTriggers.length && body) {

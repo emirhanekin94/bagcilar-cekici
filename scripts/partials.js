@@ -293,10 +293,18 @@ function breadcrumbHtml(items) {
 function regionCard(r, content) {
   const chips = (content.focus || []).slice(0, 3).map(esc).join(' · ');
   return `<a class="region-card" href="${r.url}" data-cat="${r.category}">
-    <span class="rc-badge"><span class="pulse-dot"></span>7/24 Nöbetçi</span>
-    <h3>${icon('pin')}${esc(r.name)} Çekici</h3>
-    <p>${chips}</p>
-    <span class="rc-foot"><span>Varış: 10 - 15 Dk</span><span class="rc-go">Hemen İncele ${icon('arrow')}</span></span>
+    <div class="rc-header">
+      <span class="rc-pin-icon">${icon('pin')}</span>
+      <span class="rc-eta-badge"><span class="pulse-dot"></span>10–15 Dk Varış</span>
+    </div>
+    <div class="rc-body">
+      <h3>${esc(r.name)} Çekici</h3>
+      <p>${chips}</p>
+    </div>
+    <div class="rc-footer">
+      <span class="rc-status">7/24 Nöbetçi Filo</span>
+      <span class="rc-link-text">İncele ${icon('arrow')}</span>
+    </div>
   </a>`;
 }
 

@@ -224,10 +224,22 @@ function buildHome() {
 </div></section>
 
 <section class="section" id="bolgeler"><div class="container">
-  <div class="sec-head"><h2>Hizmet Bölgelerimiz</h2><p>${REGIONS.length} bölgede nöbetçi ekip. Bağcılar merkezden yola çıkıyor, komşu ilçelere doğrudan ulaşıyoruz.</p></div>
-  <div class="chips" role="group" aria-label="Bölge filtresi">${filterBtns}</div>
-  <div class="region-grid">${regionCards}</div>
-  <p class="center"><a class="btn btn-outline" href="/bolgeler/">Tüm Bölgeleri Gör ${icon('arrow')}</a></p>
+  <div class="sec-head">
+    <h2>Hizmet Bölgelerimiz</h2>
+    <p>Bağcılar merkezli nöbetçi filomuzla 15 stratejik noktaya 10–15 dakikada ulaşıyoruz.</p>
+  </div>
+  <div class="region-grid" id="home-region-grid">
+    ${REGIONS.slice(0, 6).map(r => P.regionCard(r, regionContent[r.slug])).join('')}
+  </div>
+  <div class="region-grid home-extra-grid" id="home-extra-regions" hidden>
+    ${REGIONS.slice(6).map(r => P.regionCard(r, regionContent[r.slug])).join('')}
+  </div>
+  <div class="center home-region-actions" style="margin-top: 1.5rem; display: flex; justify-content: center; gap: 12px; flex-wrap: wrap;">
+    <button type="button" class="btn btn-primary" id="btn-toggle-all-regions" aria-expanded="false">
+      ${icon('pin')} <span id="toggle-regions-label">Tüm Bölgeleri Göster (15 Bölge)</span>
+    </button>
+    <a class="btn btn-outline" href="/bolgeler/">Bölgeler Detay Sayfası ${icon('arrow')}</a>
+  </div>
 </div></section>
 
 <section class="section alt" id="neden-biz"><div class="container why-grid">
@@ -299,48 +311,92 @@ function buildRegionPages() {
     const vehicles = c.vehicles.map(v => `<tr><th scope="row">${esc(v.type)}</th><td>${v.note}</td></tr>`).join('');
 
     const main = `
-<section class="hero-section hero-region">
-  <picture class="hero-bg-picture">
-    <source media="(max-width: 768px)" srcset="/images/${hero.mobile}" type="image/webp">
-    <img src="/images/${hero.desktop}" alt="${esc(r.fullName)} Oto Çekici ve Yol Yardım - ${BUSINESS.name}" class="hero-bg-img"
-      fetchpriority="high" loading="eager" decoding="async" width="1280" height="720">
-  </picture>
-  <div class="hero-bg-overlay"></div>
-
-  <div class="container hero-content">
-    <div class="hero-text">
+<section class="hero-section hero-region-luxury">
+  <div class="hero-ambient-glow" aria-hidden="true"></div>
+  <div class="container hero-region-container">
+    <div class="hero-region-text">
       ${P.breadcrumbHtml(crumbs)}
-      <div class="urgent-badge">
-        <span class="pulse-dot"></span>
-        <span>${esc(r.fullName)} ve çevresinde ortalama varış süremiz 10–15 dakika!</span>
-      </div>
-      <h1 class="hero-title">${esc(h1)}</h1>
-      <p class="hero-subtitle">${esc(c.lead)}</p>
 
-      <div class="hero-buttons">
+      <div class="dispatch-tag">
+        <span class="live-pulse"></span>
+        <span>7/24 Nöbetçi Çekici &bull; ${esc(r.fullName)} &bull; 10–15 Dk Varış</span>
+      </div>
+
+      <h1 class="hero-region-title">
+        ${esc(r.fullName)} Çekici &amp; <span class="text-gradient">Oto Kurtarma</span>
+      </h1>
+
+      <p class="hero-region-desc">
+        ${esc(c.lead)}
+      </p>
+
+      <div class="hero-key-pillars">
+        <div class="pillar-card">
+          <div class="pillar-icon">${icon('clock')}</div>
+          <div class="pillar-info">
+            <strong>10–15 Dakika</strong>
+            <span>Hızlı İntikal</span>
+          </div>
+        </div>
+        <div class="pillar-card">
+          <div class="pillar-icon">${icon('shield')}</div>
+          <div class="pillar-info">
+            <strong>%100 Kaskolu</strong>
+            <span>Sıfır Hasar</span>
+          </div>
+        </div>
+        <div class="pillar-card">
+          <div class="pillar-icon">${icon('tag')}</div>
+          <div class="pillar-info">
+            <strong>Sabit Fiyat</strong>
+            <span>Telefonda Onay</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-desktop-actions">
         ${ctaButtons(r)}
-      </div>
-
-      <div class="hero-stats">
-        <div class="stat-item"><span class="stat-number">15 <span>Dk</span></span><span class="stat-label">Ortalama Ulaşım</span></div>
-        <div class="stat-item"><span class="stat-number">7/24 <span>Saat</span></span><span class="stat-label">Nöbetçi Çekici</span></div>
-        <div class="stat-item"><span class="stat-number">%100 <span>Güven</span></span><span class="stat-label">Kaskolu Taşıma</span></div>
-        <div class="stat-item"><span class="stat-number">5.0 <span>★</span></span><span class="stat-label">Google Müşteri Puanı</span></div>
       </div>
     </div>
 
-    <div class="hero-form-card" id="hero-form-card">
-      <div class="form-card-header" id="hero-form-toggle">
-        <div class="form-card-header-text">
-          <h2 class="form-card-title">Hızlı Fiyat Teklifi Al</h2>
-          <p class="form-card-subtitle">${esc(r.name)} ekibimizden anında WhatsApp fiyatı gelsin:</p>
+    <div class="hero-region-visual">
+      <div class="showcase-card">
+        <div class="showcase-top-bar">
+          <span class="location-chip">
+            ${icon('pin')}<span>${esc(r.fullName)}</span>
+          </span>
+          <span class="live-status-chip">
+            <span class="live-dot"></span> 7/24 Nöbetçi
+          </span>
         </div>
-        <button type="button" class="form-card-toggle-btn" aria-label="Teklif Formunu Aç/Kapat">
-          <span class="toggle-btn-text">Formu Aç</span>
-          ${icon('chevron')}
-        </button>
+
+        <div class="showcase-img-wrap">
+          <picture>
+            <source media="(max-width: 768px)" srcset="/images/${hero.mobile}" width="640" height="480">
+            <img src="/images/${hero.desktop}" alt="${esc(r.fullName)} Oto Çekici ve Kurtarma Filosu" class="showcase-img"
+              fetchpriority="high" loading="eager" decoding="async" width="720" height="960">
+          </picture>
+        </div>
+
+        <div class="showcase-bottom-bar">
+          <div class="showcase-vehicle-meta">
+            ${icon('truck')}
+            <div>
+              <strong>Kayar Kasa Kurtarıcı</strong>
+              <span>Hasarsız Zemin Yükleme</span>
+            </div>
+          </div>
+          <div class="showcase-verified-badge"><span class="badge-dot-green"></span><span>Hasarsız Taşıma</span></div>
+        </div>
       </div>
-      ${P.waQuoteForm(r, { id: 'qr', className: 'quote-form wp-contact-form' })}
+
+      <div class="region-quote-box">
+        <div class="rq-header">
+          <span class="rq-title">${icon('whatsapp')} Hızlı Fiyat Teklifi Al</span>
+          <span class="rq-sub">${esc(r.name)} için anında WhatsApp fiyatı:</span>
+        </div>
+        ${P.waQuoteForm(r, { id: 'qr', className: 'quote-form wp-contact-form' })}
+      </div>
     </div>
   </div>
 </section>
