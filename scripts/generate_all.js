@@ -206,7 +206,7 @@ function buildHome() {
               <span>Özel Bağlama Kayışlı Hasarsız Taşıma</span>
             </div>
           </div>
-          <div class="showcase-plate-badge">Plaka: 34 MCU 817</div>
+          <div class="showcase-verified-badge"><span class="badge-dot-green"></span><span>Hasarsız Taşıma</span></div>
         </div>
       </div>
     </div>
