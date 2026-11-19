@@ -75,7 +75,7 @@ SERVICES.forEach(s => { serviceContent[s.slug] = loadServiceContent(s.slug); });
 
 /* =============== ANA SAYFA =============== */
 function buildHome() {
-  const hero = { mobile: 'otomobil-cekici-4-m.webp', desktop: 'otomobil-cekici-4.webp' };
+  const hero = { mobile: 'otomobil-cekici-2-m.webp', desktop: 'otomobil-cekici-2.webp' };
   const title = 'Bağcılar Oto Çekici | 7/24 Yol Yardım & Oto Kurtarma';
   const description = 'Bağcılar çekici: kayar kasa ile 7/24 oto çekici, akü takviye ve yol yardım. Esenler, Başakşehir, İkitelli ve Avrupa Yakası’nda 10-15 dk varış. Hemen arayın.';
 
@@ -128,51 +128,87 @@ function buildHome() {
   const blogCards = posts.slice(0, 3).map(p => `<a class="blog-card" href="${p.url}"><img src="/images/${p.cover}" width="720" height="960" alt="${esc(p.title)}" loading="lazy" decoding="async"><div><span class="meta">${dateTr(p.date)} · ${p.readMinutes} dk okuma</span><h3>${esc(p.title)}</h3><p>${esc(p.excerpt)}</p></div></a>`).join('');
 
   const main = `
-<section class="hero-section hero-home">
-  <picture class="hero-bg-picture">
-    <source media="(max-width: 768px)" srcset="/images/otomobil-cekici-4-m.webp" type="image/webp">
-    <img src="/images/otomobil-cekici-4.webp" alt="Bağcılar Oto Çekici ve Yol Yardım" class="hero-bg-img"
-      fetchpriority="high" loading="eager" decoding="async" width="1280" height="720">
-  </picture>
-  <div class="hero-bg-overlay"></div>
-
-  <div class="container hero-content">
-    <div class="hero-text">
-      <div class="urgent-badge">
-        <span class="pulse-dot"></span>
-        <span>Yolda mı kaldınız? Bağcılar ve çevresinde ortalama varış süremiz 10–15 dakika!</span>
+<section class="hero-home-luxury">
+  <div class="hero-ambient-glow" aria-hidden="true"></div>
+  <div class="container hero-home-container">
+    <div class="hero-home-text">
+      <div class="dispatch-tag">
+        <span class="live-pulse"></span>
+        <span>7/24 Aktif Saha Filosu &bull; Bağcılar &bull; 10–15 Dk Varış</span>
       </div>
-      <h1 class="hero-title">
-        Bağcılar Çekici &amp; 7/24 <span class="highlight">Bağcılar Oto Kurtarma</span> | En Yakın <span class="highlight">Oto Çekici</span>
+
+      <h1 class="hero-home-title">
+        Bağcılar Oto Çekici &amp; <span class="text-gradient">Oto Kurtarma</span>
       </h1>
-      <p class="hero-subtitle">
-        Bağcılar merkezli kayar kasa çekici ve acil oto kurtarma filomuzla; Esenler, Başakşehir, İkitelli, TEM ve Basın Ekspres güzergahlarında donanımlı araçlarımızla 7/24 hasarsız araç taşıma ve yol yardım hizmeti veriyoruz.
+
+      <p class="hero-home-desc">
+        TEM Otoyolu, Basın Ekspres, İSTOÇ ve Mahmutbey aksında donanımlı hidrolik kayar kasa çekicilerimizle 7/24 hasarsız araç taşıma ve profesyonel yol yardım hizmeti veriyoruz.
       </p>
 
-      <div class="hero-buttons">
-        ${ctaButtons(null)}
+      <div class="hero-key-pillars">
+        <div class="pillar-card">
+          <div class="pillar-icon">${icon('clock')}</div>
+          <div class="pillar-info">
+            <strong>10–15 Dakika</strong>
+            <span>Hızlı İntikal</span>
+          </div>
+        </div>
+        <div class="pillar-card">
+          <div class="pillar-icon">${icon('shield')}</div>
+          <div class="pillar-info">
+            <strong>%100 Kaskolu</strong>
+            <span>Sıfır Hasar</span>
+          </div>
+        </div>
+        <div class="pillar-card">
+          <div class="pillar-icon">${icon('tag')}</div>
+          <div class="pillar-info">
+            <strong>Sabit Fiyat</strong>
+            <span>Telefonda Onay</span>
+          </div>
+        </div>
       </div>
 
-      <div class="hero-stats">
-        <div class="stat-item"><span class="stat-number">15 <span>Dk</span></span><span class="stat-label">Ortalama Ulaşım</span></div>
-        <div class="stat-item"><span class="stat-number">7/24 <span>Saat</span></span><span class="stat-label">Nöbetçi Çekici</span></div>
-        <div class="stat-item"><span class="stat-number">%100 <span>Güven</span></span><span class="stat-label">Kaskolu Taşıma</span></div>
-        <div class="stat-item"><span class="stat-number">5.0 <span>★</span></span><span class="stat-label">Google Müşteri Puanı</span></div>
+      <div class="hero-desktop-actions">
+        <a class="btn btn-call" href="${telLink()}" data-track="call">
+          ${icon('phone')}<span>Hemen Ara <b>${BUSINESS.phoneDisplay}</b></span>
+        </a>
+        <a class="btn btn-wa" href="${waLink('Merhaba Bağcılar Oto Çekici, acil çekiciye ihtiyacım var. Konumumu paylaşıyorum.')}" data-track="wa" target="_blank" rel="noopener noreferrer">
+          ${icon('whatsapp')}<span>WhatsApp Konum Gönder</span>
+        </a>
       </div>
     </div>
 
-    <div class="hero-form-card" id="hero-form-card">
-      <div class="form-card-header" id="hero-form-toggle">
-        <div class="form-card-header-text">
-          <h2 class="form-card-title">Hızlı Fiyat Teklifi Al</h2>
-          <p class="form-card-subtitle">Bağcılar ekibimizden anında WhatsApp fiyatı gelsin:</p>
+    <div class="hero-home-visual">
+      <div class="showcase-card">
+        <div class="showcase-top-bar">
+          <span class="location-chip">
+            ${icon('pin')}<span>Bağcılar &bull; Batışehir</span>
+          </span>
+          <span class="live-status-chip">
+            <span class="live-dot"></span> Canlı Operasyon
+          </span>
         </div>
-        <button type="button" class="form-card-toggle-btn" aria-label="Teklif Formunu Aç/Kapat">
-          <span class="toggle-btn-text">Formu Aç</span>
-          ${icon('chevron')}
-        </button>
+
+        <div class="showcase-img-wrap">
+          <picture>
+            <source media="(max-width: 768px)" srcset="/images/otomobil-cekici-2-m.webp" width="640" height="480">
+            <img src="/images/otomobil-cekici-2.webp" alt="Bağcılar Batışehir Kayar Kasa Oto Çekici Filosu" class="showcase-img"
+              fetchpriority="high" loading="eager" decoding="async" width="720" height="960">
+          </picture>
+        </div>
+
+        <div class="showcase-bottom-bar">
+          <div class="showcase-vehicle-meta">
+            ${icon('truck')}
+            <div>
+              <strong>Hidrolik Kayar Kasa</strong>
+              <span>Özel Bağlama Kayışlı Hasarsız Taşıma</span>
+            </div>
+          </div>
+          <div class="showcase-plate-badge">Plaka: 34 MCU 817</div>
+        </div>
       </div>
-      ${P.waQuoteForm(null, { id: 'qh', className: 'quote-form wp-contact-form' })}
     </div>
   </div>
 </section>
