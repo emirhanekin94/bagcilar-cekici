@@ -75,7 +75,7 @@ SERVICES.forEach(s => { serviceContent[s.slug] = loadServiceContent(s.slug); });
 
 /* =============== ANA SAYFA =============== */
 function buildHome() {
-  const hero = { mobile: 'kapak-fotografi-mobile.webp', desktop: 'kapak-fotografi.webp' };
+  const hero = { mobile: 'otomobil-cekici-4-m.webp', desktop: 'otomobil-cekici-4.webp' };
   const title = 'Bağcılar Oto Çekici | 7/24 Yol Yardım & Oto Kurtarma';
   const description = 'Bağcılar çekici: kayar kasa ile 7/24 oto çekici, akü takviye ve yol yardım. Esenler, Başakşehir, İkitelli ve Avrupa Yakası’nda 10-15 dk varış. Hemen arayın.';
 
@@ -130,8 +130,8 @@ function buildHome() {
   const main = `
 <section class="hero-section hero-home">
   <picture class="hero-bg-picture">
-    <source media="(max-width: 768px)" srcset="/images/kapak-fotografi-mobile.webp" type="image/webp">
-    <img src="/images/kapak-fotografi.webp" alt="Bağcılar Oto Çekici ve Yol Yardım" class="hero-bg-img"
+    <source media="(max-width: 768px)" srcset="/images/otomobil-cekici-4-m.webp" type="image/webp">
+    <img src="/images/otomobil-cekici-4.webp" alt="Bağcılar Oto Çekici ve Yol Yardım" class="hero-bg-img"
       fetchpriority="high" loading="eager" decoding="async" width="1280" height="720">
   </picture>
   <div class="hero-bg-overlay"></div>
@@ -245,7 +245,7 @@ ${ctaBand('Aracınız yolda mı kaldı?', 'Şimdi arayın; konumunuzu alıp en y
 function buildRegionPages() {
   REGIONS.forEach((r, idx) => {
     const c = regionContent[r.slug];
-    const hero = { mobile: 'kapak-fotografi-mobile.webp', desktop: 'kapak-fotografi.webp' };
+    const hero = { mobile: `${r.hero}-m.webp`, desktop: `${r.hero}.webp` };
     const h1 = c.h1 || `${r.fullName} Çekici & 7/24 ${r.fullName} Oto Kurtarma | En Yakın Oto Çekici`;
     const crumbs = [['Ana Sayfa', '/'], ['Hizmet Bölgeleri', '/bolgeler/'], [r.name, r.url]];
     const fieldImg = GALLERY[(idx * 5 + 2) % GALLERY.length];
@@ -265,8 +265,8 @@ function buildRegionPages() {
     const main = `
 <section class="hero-section hero-region">
   <picture class="hero-bg-picture">
-    <source media="(max-width: 768px)" srcset="/images/kapak-fotografi-mobile.webp" type="image/webp">
-    <img src="/images/kapak-fotografi.webp" alt="${esc(r.fullName)} Oto Çekici ve Yol Yardım - ${BUSINESS.name}" class="hero-bg-img"
+    <source media="(max-width: 768px)" srcset="/images/${hero.mobile}" type="image/webp">
+    <img src="/images/${hero.desktop}" alt="${esc(r.fullName)} Oto Çekici ve Yol Yardım - ${BUSINESS.name}" class="hero-bg-img"
       fetchpriority="high" loading="eager" decoding="async" width="1280" height="720">
   </picture>
   <div class="hero-bg-overlay"></div>
