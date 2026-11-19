@@ -188,10 +188,7 @@ b {
 
 /* Top Bar */
 .top-bar {
-  background: var(--navy);
-  color: #E2E8F0;
-  font-size: 0.78rem;
-  line-height: 1.35;
+  display: none !important;
 }
 
 .top-bar-inner {

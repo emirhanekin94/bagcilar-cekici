@@ -121,12 +121,8 @@ function logoMark() {
   return `<svg class="brand-mark" viewBox="0 0 40 40" width="40" height="40" aria-hidden="true" focusable="false"><rect width="40" height="40" rx="10" fill="#0B1F3A"/><path d="M20 10v12a6 6 0 1 1-6-6" fill="none" stroke="#fff" stroke-width="3.2" stroke-linecap="round"/><circle cx="20" cy="9.5" r="3" fill="#DC2626"/></svg>`;
 }
 
-/* ---------- Üst şerit + navbar (bölge sayfalarında bölge adı yazar) ---------- */
-function topBar(region) {
-  const msg = region
-    ? `${esc(region.fullName)} ve çevresinde 7/24 nöbetçi çekici, ortalama varış ${BUSINESS.etaMinutes}`
-    : `7/24 Nöbetçi Çekici: Bağcılar ve Avrupa Yakası'nda ortalama varış ${BUSINESS.etaMinutes}`;
-  return `<div class="top-bar"><div class="container top-bar-inner"><span class="live"><span class="pulse-dot"></span>${msg}</span><a class="top-bar-phone" href="${telLink()}" data-track="call">${BUSINESS.phoneDisplay}</a></div></div>`;
+function topBar() {
+  return '';
 }
 
 function headerNav(ctx) {
@@ -137,7 +133,6 @@ function headerNav(ctx) {
   const brandTitle = region ? region.navTitle : BUSINESS.name.toLocaleUpperCase('tr-TR');
   const brandSub = region ? region.navSub : '7/24 Yol Yardım & Kurtarma';
   return `<a class="skip-link" href="#main-content">İçeriğe geç</a>
-  ${topBar(region)}
   <header class="site-header">
     <div class="container nav-inner">
       <a href="/" class="brand" aria-label="${esc(BUSINESS.name)} ana sayfa">${logoMark()}<span class="brand-text"><strong>${esc(brandTitle)}</strong><small>${esc(brandSub)}</small></span></a>
