@@ -75,7 +75,7 @@ SERVICES.forEach(s => { serviceContent[s.slug] = loadServiceContent(s.slug); });
 
 /* =============== ANA SAYFA =============== */
 function buildHome() {
-  const hero = { mobile: 'otomobil-cekici-4-m.webp', desktop: 'otomobil-cekici-4.webp' };
+  const hero = { mobile: 'kapak-fotografi-mobile.webp', desktop: 'kapak-fotografi.webp' };
   const title = 'Bağcılar Oto Çekici | 7/24 Yol Yardım & Oto Kurtarma';
   const description = 'Bağcılar çekici: kayar kasa ile 7/24 oto çekici, akü takviye ve yol yardım. Esenler, Başakşehir, İkitelli ve Avrupa Yakası’nda 10-15 dk varış. Hemen arayın.';
 
@@ -128,23 +128,52 @@ function buildHome() {
   const blogCards = posts.slice(0, 3).map(p => `<a class="blog-card" href="${p.url}"><img src="/images/${p.cover}" width="720" height="960" alt="${esc(p.title)}" loading="lazy" decoding="async"><div><span class="meta">${dateTr(p.date)} · ${p.readMinutes} dk okuma</span><h3>${esc(p.title)}</h3><p>${esc(p.excerpt)}</p></div></a>`).join('');
 
   const main = `
-<section class="hero hero-home">
-  <div class="container hero-grid">
-    <div class="hero-copy">
-      <span class="eta-badge"><span class="pulse-dot"></span>Bağcılar'da ortalama varış ${BUSINESS.etaMinutes}</span>
-      <h1>Bağcılar Çekici: 7/24 Oto Çekici &amp; Yol Yardım</h1>
-      <p class="lead">Kayar kasa çekici, oto kurtarma ve akü takviye. Bağcılar'dan Esenler, Başakşehir ve İkitelli'ye kadar nöbetçi ekibimiz hazır; fiyatı çekici yola çıkmadan telefonda söyleriz.</p>
-      ${ctaButtons(null)}
-      ${statsRow()}
+<section class="hero-section hero-home">
+  <picture class="hero-bg-picture">
+    <source media="(max-width: 768px)" srcset="/images/kapak-fotografi-mobile.webp" type="image/webp">
+    <img src="/images/kapak-fotografi.webp" alt="Bağcılar Oto Çekici ve Yol Yardım" class="hero-bg-img"
+      fetchpriority="high" loading="eager" decoding="async" width="1280" height="720">
+  </picture>
+  <div class="hero-bg-overlay"></div>
+
+  <div class="container hero-content">
+    <div class="hero-text">
+      <div class="urgent-badge">
+        <span class="pulse-dot"></span>
+        <span>Yolda mı kaldınız? Bağcılar ve çevresinde ortalama varış süremiz 10–15 dakika!</span>
+      </div>
+      <h1 class="hero-title">
+        Bağcılar Çekici &amp; 7/24 <span class="highlight">Bağcılar Oto Kurtarma</span> | En Yakın <span class="highlight">Oto Çekici</span>
+      </h1>
+      <p class="hero-subtitle">
+        Bağcılar merkezli kayar kasa çekici ve acil oto kurtarma filomuzla; Esenler, Başakşehir, İkitelli, TEM ve Basın Ekspres güzergahlarında donanımlı araçlarımızla 7/24 hasarsız araç taşıma ve yol yardım hizmeti veriyoruz.
+      </p>
+
+      <div class="hero-buttons">
+        ${ctaButtons(null)}
+      </div>
+
+      <div class="hero-stats">
+        <div class="stat-item"><span class="stat-number">15 <span>Dk</span></span><span class="stat-label">Ortalama Ulaşım</span></div>
+        <div class="stat-item"><span class="stat-number">7/24 <span>Saat</span></span><span class="stat-label">Nöbetçi Çekici</span></div>
+        <div class="stat-item"><span class="stat-number">%100 <span>Güven</span></span><span class="stat-label">Kaskolu Taşıma</span></div>
+        <div class="stat-item"><span class="stat-number">5.0 <span>★</span></span><span class="stat-label">Google Müşteri Puanı</span></div>
+      </div>
     </div>
-    <div class="hero-photo">
-      ${picture({ desktop: hero.desktop, mobile: hero.mobile, alt: 'Bağcılar oto çekici kayar kasa ile aracı yüklüyor', eager: true })}
-      <span class="photo-badge"><b>15 Dk</b> Varış</span>
+
+    <div class="hero-form-card" id="hero-form-card">
+      <div class="form-card-header" id="hero-form-toggle">
+        <div class="form-card-header-text">
+          <h2 class="form-card-title">Hızlı Fiyat Teklifi Al</h2>
+          <p class="form-card-subtitle">Bağcılar ekibimizden anında WhatsApp fiyatı gelsin:</p>
+        </div>
+        <button type="button" class="form-card-toggle-btn" aria-label="Teklif Formunu Aç/Kapat">
+          <span class="toggle-btn-text">Formu Aç</span>
+          ${icon('chevron')}
+        </button>
+      </div>
+      ${P.waQuoteForm(null, { id: 'qh', className: 'quote-form wp-contact-form' })}
     </div>
-  </div>
-  <div class="container quote-strip">
-    <strong>Hızlı fiyat al</strong>
-    ${P.waQuoteForm(null, { className: 'quote-form quote-inline', id: 'qh' })}
   </div>
 </section>
 
@@ -216,7 +245,7 @@ ${ctaBand('Aracınız yolda mı kaldı?', 'Şimdi arayın; konumunuzu alıp en y
 function buildRegionPages() {
   REGIONS.forEach((r, idx) => {
     const c = regionContent[r.slug];
-    const hero = { mobile: r.hero + '-m.webp', desktop: r.hero + '.webp' };
+    const hero = { mobile: 'kapak-fotografi-mobile.webp', desktop: 'kapak-fotografi.webp' };
     const h1 = c.h1 || `${r.fullName} Çekici & 7/24 ${r.fullName} Oto Kurtarma | En Yakın Oto Çekici`;
     const crumbs = [['Ana Sayfa', '/'], ['Hizmet Bölgeleri', '/bolgeler/'], [r.name, r.url]];
     const fieldImg = GALLERY[(idx * 5 + 2) % GALLERY.length];
@@ -234,19 +263,48 @@ function buildRegionPages() {
     const vehicles = c.vehicles.map(v => `<tr><th scope="row">${esc(v.type)}</th><td>${v.note}</td></tr>`).join('');
 
     const main = `
-<section class="hero hero-section hero-region">
-  <div class="hero-grid-r">
-    <div class="hero-photo">
-      ${picture({ desktop: hero.desktop, mobile: hero.mobile, alt: `${r.fullName} çekici kayar kasa ile araç yüklüyor - ${BUSINESS.name}`, eager: true })}
-    </div>
-    <div class="hero-copy">
+<section class="hero-section hero-region">
+  <picture class="hero-bg-picture">
+    <source media="(max-width: 768px)" srcset="/images/kapak-fotografi-mobile.webp" type="image/webp">
+    <img src="/images/kapak-fotografi.webp" alt="${esc(r.fullName)} Oto Çekici ve Yol Yardım - ${BUSINESS.name}" class="hero-bg-img"
+      fetchpriority="high" loading="eager" decoding="async" width="1280" height="720">
+  </picture>
+  <div class="hero-bg-overlay"></div>
+
+  <div class="container hero-content">
+    <div class="hero-text">
       ${P.breadcrumbHtml(crumbs)}
-      <span class="eta-badge"><span class="pulse-dot"></span>${esc(r.fullName)} ve çevresinde ortalama varış süremiz 10–15 dakika!</span>
-      <h1>${esc(h1)}</h1>
-      <p class="lead">${esc(c.lead)}</p>
-      ${ctaButtons(r)}
-      ${statsRow()}
-      <details class="quote-details"><summary>${icon('whatsapp')}<span>Hızlı WhatsApp Fiyat Formu</span>${icon('chevron')}</summary>${P.waQuoteForm(r, { id: 'qr' })}</details>
+      <div class="urgent-badge">
+        <span class="pulse-dot"></span>
+        <span>${esc(r.fullName)} ve çevresinde ortalama varış süremiz 10–15 dakika!</span>
+      </div>
+      <h1 class="hero-title">${esc(h1)}</h1>
+      <p class="hero-subtitle">${esc(c.lead)}</p>
+
+      <div class="hero-buttons">
+        ${ctaButtons(r)}
+      </div>
+
+      <div class="hero-stats">
+        <div class="stat-item"><span class="stat-number">15 <span>Dk</span></span><span class="stat-label">Ortalama Ulaşım</span></div>
+        <div class="stat-item"><span class="stat-number">7/24 <span>Saat</span></span><span class="stat-label">Nöbetçi Çekici</span></div>
+        <div class="stat-item"><span class="stat-number">%100 <span>Güven</span></span><span class="stat-label">Kaskolu Taşıma</span></div>
+        <div class="stat-item"><span class="stat-number">5.0 <span>★</span></span><span class="stat-label">Google Müşteri Puanı</span></div>
+      </div>
+    </div>
+
+    <div class="hero-form-card" id="hero-form-card">
+      <div class="form-card-header" id="hero-form-toggle">
+        <div class="form-card-header-text">
+          <h2 class="form-card-title">Hızlı Fiyat Teklifi Al</h2>
+          <p class="form-card-subtitle">${esc(r.name)} ekibimizden anında WhatsApp fiyatı gelsin:</p>
+        </div>
+        <button type="button" class="form-card-toggle-btn" aria-label="Teklif Formunu Aç/Kapat">
+          <span class="toggle-btn-text">Formu Aç</span>
+          ${icon('chevron')}
+        </button>
+      </div>
+      ${P.waQuoteForm(r, { id: 'qr', className: 'quote-form wp-contact-form' })}
     </div>
   </div>
 </section>

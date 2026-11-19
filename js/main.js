@@ -155,6 +155,21 @@
     }
   }
 
+  /* ---------- Hero Form Accordion Toggle (Mobile) ---------- */
+  document.querySelectorAll('.hero-form-card').forEach((card) => {
+    const toggle = card.querySelector('.form-card-header');
+    if (!toggle) return;
+    toggle.addEventListener('click', () => {
+      if (window.innerWidth <= 768) {
+        const isOpen = card.classList.toggle('open');
+        const btnText = card.querySelector('.toggle-btn-text');
+        if (btnText) {
+          btnText.textContent = isOpen ? 'Formu Kapat' : 'Formu Aç';
+        }
+      }
+    });
+  });
+
   /* ---------- Region Category Chip Filter ---------- */
   document.querySelectorAll('.chips').forEach((chipsWrap) => {
     const chips = chipsWrap.querySelectorAll('.chip[data-filter]');
